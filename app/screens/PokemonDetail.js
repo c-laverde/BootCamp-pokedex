@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, ActivityIndicator, Image, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator, Image } from 'react-native';
 
 const API = 'https://pokeapi.co/api/v2/pokemon/{item}/';
 const API2 = 'https://pokeapi.co/api/v2/pokemon/1/';
@@ -13,7 +13,6 @@ class PokemonDetail extends React.Component {
             sprites: null,
             types: null,
             moves: null,
-            movesToRender: 10
         }
 
         this.renderPokemonTypes = this.renderPokemonTypes.bind(this);
@@ -53,21 +52,12 @@ class PokemonDetail extends React.Component {
 
     renderPokemonMoves(item) {
             return (
-                <View style={styles.move}>
-                    <Text style={styles.typeContainer}>
+                <View style={styles.typeContainer}>
+                    <Text style={styles.move}>
                         {item.move.name}
                     </Text>
                 </View>
             );   
-    }
-
-    viewTypes() {
-        const { types } = this.state;
-
-        return types.map((item) => {
-            const { name } = item;
-            <Text key={(item) => item.type.name}>Type: {name}</Text>
-        });
     }
 
     render() {
@@ -82,20 +72,19 @@ class PokemonDetail extends React.Component {
                             style={{width: 400, height: 400}}
                             source={{uri: sprites.front_default}}
                         />
-                        <View>
-                            {this.viewTypes()}
-                        </View>
-                        <Text>{this.props.pokemonId}</Text>
                         <Text style={styles.name}>{pokemonDetail.name}</Text>
                         <Text style={styles.detail}>Height: {pokemonDetail.height}</Text>
                         <Text style={styles.detail}>Weight: {pokemonDetail.weight}</Text>
-                        {/* <FlatList 
+                        <Text>Type:</Text>
+                        <FlatList 
                             data={types}
-                            // horizontal={true}
+                            horizontal={true}
                             keyExtractor={(item) => item.type.name}
-                            renderItem={({item}) => this.renderPokemonTypes(item)} /> */}
+                            renderItem={({item}) => this.renderPokemonTypes(item)} />
+                        <Text>Moves:</Text>
                         <FlatList 
                             data={moves.slice(0,5)}
+                            horizontal={true}
                             keyExtractor={(item) => item.move.name}
                             renderItem={({item}) => this.renderPokemonMoves(item)} />
                     </View>
@@ -126,17 +115,19 @@ const styles = StyleSheet.create({
     detail: {
         fontSize: 32,
     },
-    containerType: {
-
+    typeContainer: {
+        marginRight: 5,
+        borderColor: 'black',
+        borderRadius: 3,
     },
     containerMove: {
 
     },
     type: {
-
+        marginRight: 5,
     },
     move: {
-
+        marginRight: 5,
     }
   });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, ActivityIndicator, Image } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator, Image, TouchableOpacity } from 'react-native';
 
 const API = 'https://pokeapi.co/api/v2/pokemon?limit=10';
 const API_IMAGES = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{item}.png'
@@ -30,17 +30,23 @@ class PokemonList extends React.Component {
 
         const id = item.url.split('/')[6];
         const uri = API_IMAGES.replace('{item}',id)
+
+        // this.props.navigation.navigate('PokeDetail', {itemId: id,
         
         return (
-            <View style={styles.item}>
-                <Image
-                    style={{width: 100, height: 100}}
-                    source={{uri: uri}}
-                />
-                <Text>
-                    {item.name}
-                </Text>
-            </View>
+            <TouchableOpacity
+                onPress={() => { alert(id) } }>
+                <View style={styles.item}>
+                    <Image
+                        style={{width: 100, height: 100}}
+                        source={{uri: uri}}
+                    />
+                    <Text>
+                        {item.name}
+                    </Text>
+                </View>
+            </TouchableOpacity>
+            
         );
     }
 
@@ -73,13 +79,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderColor: 'blue',
         width: 400,
-        height: 600
-
+        height: 650
     },
     flatList: {
         flex: 1,
-        // justifyContent: 'center',
-        // alignItems: 'center',
         backgroundColor: 'gray',
         borderColor: 'white',
         borderRadius: 5,
