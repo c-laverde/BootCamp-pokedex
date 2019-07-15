@@ -54,8 +54,8 @@ class SignInScreen extends React.Component {
 
   if(this.state.userName && this.state.pass) {
     const { navigation } = this.props;
-    const user = navigation.getParam('user', 'NO-ID');
-    const pass = navigation.getParam('pass', 'some default value');
+    const user = navigation.getParam('user', 'default user');
+    const pass = navigation.getParam('pass', 'default pass');
 
     if(user.toUpperCase() === this.state.userName.toUpperCase() && pass == this.state.pass) {
       this.props.navigation.navigate('App');
@@ -68,15 +68,6 @@ class SignInScreen extends React.Component {
     alert('Empty input!')
   }
 };
-
- /* _signInAsync = () => {
-   const { userName, pass } = this.navigation;
-   console.log(this.props);
-
-   if(userName == this.state.userName && pass === this.state.pass ){
-     this.props.navigation.navigate('App');
-   }
- }; */
 
  _showSignUp = () => {
    this.props.navigation.navigate('SingUp');
@@ -117,10 +108,6 @@ class SignUpScreen extends React.Component {
    );
  }
 
-  /* _signIn = async () => {
-    this.props.navigation.navigate('SignIn');
-  }; */
-
   _signIn = async () => {
     console.log('User ', this.state.userName, 'Pass ', this.state.pass)
     this.props.navigation.navigate('SignIn', { user: this.state.userName, pass: this.state.pass } );
@@ -151,11 +138,7 @@ class HomeScreen extends React.Component {
  }
 
  _goToDetail = () => {
-   this.props.navigation.navigate('PokeDetail',
-   /* {
-     itemId: 86,
-     otherParam: 'anything you want here',
-   } */);
+   this.props.navigation.navigate('PokeDetail');
  };
 
  _signOut =  () => {
@@ -175,8 +158,6 @@ class PokemonDetailScreen extends React.Component {
 
    return (
      <View style={styles.container}>
-       {/* <Text>itemId: {JSON.stringify(itemId)}</Text>
-       <Text>otherParam: {JSON.stringify(otherParam)}</Text> */}
        <PokemonDetail pokemonId={itemId} onclick={this._getItem}></PokemonDetail>
        <StatusBar barStyle="default" />
      </View>

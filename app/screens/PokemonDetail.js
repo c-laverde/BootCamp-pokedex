@@ -21,9 +21,6 @@ class PokemonDetail extends React.Component {
 
     async componentDidMount() {
         
-        const { pokemonId } = this.props;
-        console.log('id pass from homeScreen ', pokemonId);
-        // const pokemonInfo = API.replace('{item}', );
         const detail = await fetch(API2)
           .then(response => response.json())
           .catch(error => {

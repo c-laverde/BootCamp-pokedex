@@ -30,8 +30,6 @@ class PokemonList extends React.Component {
 
         const id = item.url.split('/')[6];
         const uri = API_IMAGES.replace('{item}',id)
-
-        // this.props.navigation.navigate('PokeDetail', {itemId: id,
         
         return (
             <TouchableOpacity
