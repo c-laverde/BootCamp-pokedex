@@ -32,8 +32,7 @@ class PokemonList extends React.Component {
         const uri = API_IMAGES.replace('{item}',id)
         
         return (
-            <TouchableOpacity
-                onPress={() => { alert(id) } }>
+            <TouchableOpacity>
                 <View style={styles.item}>
                     <Image
                         style={{width: 100, height: 100}}
